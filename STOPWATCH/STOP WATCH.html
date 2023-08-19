@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+<!-- **************************************** PROJECT CSS ************************************************** -->
+    <style>
+        body{
+            background: url(back.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        h1, button {
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 100px;
+            margin-top: 20%;
+            text-transform: uppercase;
+            color: aliceblue;
+        }
+        button {
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            left: 38%;
+            background-color: black;
+            margin-top: 0;
+            padding: 10px;
+            margin-left: 20px;
+            border: 1px solid white;
+            border-radius: 8px;
+            transition: 1s;
+        }
+        .footer{
+            text-align: center;
+            margin: 90px;
+            color: grey;
+        }
+    </style>
+<!-- ******************************************************************************************************** -->
+</head>
+<body>
+        <h1 id="h1">00:00:00</h1>
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <button onclick="restart()">Reset</button>
+        <div class="footer">
+            <p> &copy; Created by SaiGanesh Ratnala</p>
+        </div>
+</body>    
+<!-- *********************************************PROJECT JS************************************************ -->
+<script>
+        // initializations
+        var [sec, min, hours] = [0, 0, 0];
+        var time = document.getElementById("h1");
+        var timer = null;
+
+        // changes in the seconds, minutes and hours in watch
+        function stopwatch() {
+            sec++;
+            if (sec == 60) {
+                sec = 0;
+                min++;
+                if (min == 60) {
+                    min = 0;
+                    hours++;
+                }
+            }
+
+            // formating the time
+            time.innerHTML = (hours < 10 ? "0" : "") + hours + ":" +
+                             (min < 10 ? "0" : "") + min + ":" +
+                             (sec < 10 ? "0" : "") + sec;
+        }
+
+        // onclick start button
+        function start() {
+            if (timer !== null) {
+                clearInterval(timer);
+            }
+            timer = setInterval(stopwatch, 1000);
+        }
+
+        // onclick stop button
+        function stop() {
+            clearInterval(timer);   //clock should stop 
+        }
+
+        // onclick reset button
+        function restart() {
+            clearInterval(timer);   //clock stops
+            sec = 0;
+            min = 0;
+            hours = 0;
+            time.innerHTML = "00:00:00";    //reset to initial values
+        }
+    </script>
+<!-- ******************************************************************************************************* -->
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!-- **************************************** PROJECT CSS ************************************************** -->
+    <style>
+        body{
+            background: url(back2.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        h1{
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 100px;
+            margin-top: 20%;
+            text-transform: uppercase;
+            color: black;
+        }
+    </style>
+<!-- ******************************************************************************************************** -->
+</head>
+<body onload=showTime()>
+    <h1></h1>
+</body>
+<!-- **************************************** PROJECT JS ************************************************** -->
+<script>
+    function showTime(){
+        var date=new Date();    //getting default date from the System
+        var hours=date.getHours();
+        var min=date.getMinutes();
+        var sec=date.getSeconds();
+        var session="AM";
+        // change of time after 12AM to 1PM
+        if(hours>12){
+            hours=hours-12;
+            session="PM";
+        }
+        // clock formating
+        hours= hours<10? "0"+hours: hours;
+        min= min<10? "0"+min: min;
+        sec= sec<10? "0"+sec: sec;
+
+        // output
+        var time= hours+" : "+min+" : "+sec+" : "+session;
+        document.getElementsByTagName("h1")[0].innerText=time;
+        setTimeout(showTime,1000);
+    }
+</script>
+<!-- ******************************************************************************************************** -->
+</html>
